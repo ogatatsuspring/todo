@@ -2,6 +2,8 @@ package com.example.todo.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,7 +27,7 @@ public class ToDoController {
   @GetMapping( "/todos" )
   public String list( Model model ) {
     model.addAttribute( "todos", toDoService.findAllToDo() );
-    return "/todo/list";
+    return "todo/list";
   }
   
   @GetMapping( "/todos/{id}" )
@@ -43,11 +45,17 @@ public class ToDoController {
   @GetMapping( "/todos/form" )
   public String newToDo( @ModelAttribute ToDoForm form ) {
     form.setIsNew( true );
-    return "/todo/form";
+    return "todo/form";
   }
   
   @PostMapping( "/todos/save" )
-  public String create( ToDoForm form, RedirectAttributes attributes ) {
+  public String create( @Validated ToDoForm form, BindingResult bindingResult, RedirectAttributes attributes ) {
+    
+    if ( bindingResult.hasErrors() ) {
+      form.setIsNew( true );
+      return "todo/form";
+    }
+    
     ToDo todo = ToDoHelper.convertToDo( form );
     toDoService.insertToDo( todo );
     attributes.addFlashAttribute( "message", "新しいToDoが作成されました" );
@@ -60,7 +68,7 @@ public class ToDoController {
     if ( target != null ) {
       ToDoForm form = ToDoHelper.convertToDoForm( target );
       model.addAttribute( "toDoForm", form );
-      return "/todo/form";
+      return "todo/form";
     } else {
       attributes.addFlashAttribute( "errorMessage", "対象データがありません" );
       return "redirect:/todos";
@@ -68,7 +76,13 @@ public class ToDoController {
   }
   
   @PostMapping( "/todos/update" )
-  public String update( ToDoForm form, RedirectAttributes attributes ) {
+  public String update( @Validated ToDoForm form, BindingResult bindingResult, RedirectAttributes attributes ) {
+    
+    if ( bindingResult.hasErrors() ) {
+      form.setIsNew( false );
+      return( "todo/form" );
+    }
+    
     ToDo todo = ToDoHelper.convertToDo( form );
     if ( toDoService.updateToDo( todo ) ) {
       attributes.addFlashAttribute( "message", "ToDoが更新されました" );
