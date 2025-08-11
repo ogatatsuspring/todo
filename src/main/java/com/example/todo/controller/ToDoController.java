@@ -70,9 +70,24 @@ public class ToDoController {
   @PostMapping( "/todos/update" )
   public String update( ToDoForm form, RedirectAttributes attributes ) {
     ToDo todo = ToDoHelper.convertToDo( form );
-    toDoService.updateToDo( todo );
-    attributes.addFlashAttribute( "message", "ToDoが更新されました" );
-    return "redirect:/todos";
+    if ( toDoService.updateToDo( todo ) ) {
+      attributes.addFlashAttribute( "message", "ToDoが更新されました" );
+      return "redirect:/todos";
+    } else {
+      attributes.addFlashAttribute( "errorMessage", "ToDo更新が失敗しました" );
+      return "redirect:/todos";
+    }
+  }
+  
+  @PostMapping( "/todos/delete/{id}")
+  public String delete( @PathVariable Integer id, RedirectAttributes attributes ) {
+    if ( toDoService.deleteToDo( id ) ) {
+      attributes.addFlashAttribute( "message", "ToDoが削除されました" );
+      return "redirect:/todos";
+    } else {
+      attributes.addFlashAttribute( "errorMessage", "ToDo削除が失敗しました" );
+      return "redirect:/todos";
+    }
   }
 
 }
