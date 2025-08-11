@@ -12,6 +12,8 @@
       updated_at as updatedAt
     from
       todos
+    order by
+      id
   </select>
   
   <!-- 1件検索 -->
