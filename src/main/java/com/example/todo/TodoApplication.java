@@ -1,5 +1,8 @@
 package com.example.todo;
 
+import java.sql.Driver;
+import java.sql.DriverManager;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -71,6 +74,10 @@ public class TodoApplication implements CommandLineRunner {
 	  } else {
 	    System.out.println( "====削除失敗====" );
 	  }
+	  
+	  Driver driver = DriverManager.getDriver("jdbc:postgresql://localhost:5432/");
+    System.out.println(driver.getClass().getName());
+    System.out.println(driver.getMajorVersion() + "." + driver.getMinorVersion());
 	  
 	}
 
