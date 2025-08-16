@@ -6,3 +6,18 @@ values( '図書館に行く', '本を借りる', current_timestamp, current_time
 
 insert into todos( todo, detail, created_at, updated_at )
 values( 'ジムに行く', '運動する', current_timestamp, current_timestamp );
+
+
+
+/*
+insert into authentications( username, password )
+values( 'admin', 'adminpass' );
+*/
+
+
+insert into authentications( username, password, authority )
+values( 'admin', '$2a$10$cJAbGIYRBBFoawUSRd8x3e5tI0ouW4S02TgQBx/pDv0y3CrXrcebC', 'ADMIN' );
+
+insert into authentications( username, password, authority )
+values( 'user', '$2a$10$YwKVsSNu3Vsf/pkk0hRWZe7mkfHQvVe3dMEpMgdXBagbakE80qVZy', 'USER' );
+
