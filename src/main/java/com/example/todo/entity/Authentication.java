@@ -7,4 +7,5 @@ public class Authentication {
   private String username;
   private String password;
   private Role authority;
+  private String displayname;
 }

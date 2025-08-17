@@ -21,5 +21,6 @@ create table todos(
 create table authentications (
 	username varchar( 50 ) primary key,
 	password varchar( 255 ) not null,
-	authority role not null
+	authority role not null,
+	displayname varchar( 50 ) not null
 );

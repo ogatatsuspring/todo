@@ -3,7 +3,7 @@
 <mapper namespace="com.example.todo.repository.AuthenticationMapper">
 
   <select id="selectByUsername" resultType="com.example.todo.entity.Authentication">
-    select username, password, authority from authentications where username = #{username}
+    select username, password, authority, displayname from authentications where username = #{username}
   </select>
   
 </mapper>

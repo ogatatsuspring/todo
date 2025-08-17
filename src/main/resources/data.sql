@@ -15,9 +15,9 @@ values( 'admin', 'adminpass' );
 */
 
 
-insert into authentications( username, password, authority )
-values( 'admin', '$2a$10$cJAbGIYRBBFoawUSRd8x3e5tI0ouW4S02TgQBx/pDv0y3CrXrcebC', 'ADMIN' );
+insert into authentications( username, password, authority, displayname )
+values( 'admin', '$2a$10$cJAbGIYRBBFoawUSRd8x3e5tI0ouW4S02TgQBx/pDv0y3CrXrcebC', 'ADMIN', '管理太郎' );
 
-insert into authentications( username, password, authority )
-values( 'user', '$2a$10$YwKVsSNu3Vsf/pkk0hRWZe7mkfHQvVe3dMEpMgdXBagbakE80qVZy', 'USER' );
+insert into authentications( username, password, authority, displayname )
+values( 'user', '$2a$10$YwKVsSNu3Vsf/pkk0hRWZe7mkfHQvVe3dMEpMgdXBagbakE80qVZy', 'USER', '一般花子' );
 

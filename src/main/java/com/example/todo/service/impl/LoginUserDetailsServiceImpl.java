@@ -43,7 +43,8 @@ public class LoginUserDetailsServiceImpl implements UserDetailsService {
         authentication.getUsername(),
         authentication.getPassword(),
 //        Collections.emptyList() );
-        getAuthorityList( authentication.getAuthority() ) );
+        getAuthorityList( authentication.getAuthority() ),
+        authentication.getDisplayname() );
     } else {
       throw new UsernameNotFoundException( username + " => 指定しているユーザ名は存在しません" );
     }
