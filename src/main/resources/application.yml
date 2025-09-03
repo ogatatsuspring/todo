@@ -19,3 +19,6 @@ logging:
       example:
         todo:
           repository: DEBUG
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
